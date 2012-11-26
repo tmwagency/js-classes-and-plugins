@@ -41,7 +41,7 @@ Facebook.prototype.init = function ()
         
         FB.getLoginStatus (function (response)
         {
-            console.log ("Facebook:: [init - FB.getLoginStatus]");
+            console.log ("Facebook:: [init - FB.getLoginStatus] response.status = " + response.status);
             //this is useful if you want to avoid the infinite loop bug, as it only reloads the page when you log in
             if (response.status != "connected")
             {
@@ -123,4 +123,10 @@ Facebook.prototype.postToFeed = function (postObject, useAPI)
                 self.postToFeedSuccessSignal.dispatch ();
         }
     }
+}
+
+Facebook.prototype.setIframeSize = function (canvasWidth, canvasHeight)
+{
+    // FB.Canvas.setAutoGrow (false);
+    FB.Canvas.setSize ({width: canvasWidth, height: canvasHeight});
 }
