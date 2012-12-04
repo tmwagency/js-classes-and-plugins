@@ -1,7 +1,7 @@
-Facebook = function (appID, canvasURL, permissions, channelURL, status, cookie, xfbml)
+Facebook = function (appID, redirectURI, permissions, channelURL, status, cookie, xfbml)
 {    
     this.APP_ID = appID;
-    this.CANVAS_URL = canvasURL;
+    this.REDIRECT_URI = redirectURI;
     channelURL ? this.CHANNEL_URL = channelURL : this.CHANNEL_URL = "";
     status ? this.STATUS = status : this.STATUS = true;
     cookie ? this.COOKIE = cookie : this.COOKIE = true;
@@ -47,7 +47,7 @@ Facebook.prototype.init = function ()
             {
                 var oauth_url = "https://www.facebook.com/dialog/oauth/";
                 oauth_url += "?client_id=" + self.APP_ID;
-                oauth_url += "&redirect_uri=" + encodeURIComponent (self.CANVAS_URL); // live address
+                oauth_url += "&redirect_uri=" + encodeURIComponent (self.REDIRECT_URI); // live address
                 
                 // additional permissions
                 var i = 0;
