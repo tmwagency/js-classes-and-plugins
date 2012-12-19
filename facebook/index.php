@@ -12,6 +12,7 @@
             <div id="fb-root"></div>
         <!-- ======================================================= -->
         
+        <button id="loginButton">Login to Facebook</button>
         <button id="uiPostButton">Post With UI</button>
         <button id="apiPostButton">Post With API</button>
         
@@ -31,7 +32,12 @@
              <script type="text/javascript" src="js/libs/jquery.min.js"></script>
         <!-- ======================================================= -->
             
-            <script type="text/javascript" src="js/Facebook.js"></script>
+        <!-- =======================================================
+                Facebook class being demonstrated- This is required (obviously)!
+             ======================================================= -->
+            <script type="text/javascript" src="js/libs/Facebook.js"></script>
+        <!-- ======================================================= -->
+            
             <script type="text/javascript" src="js/App.js"></script>
             <script type="text/javascript" src="js/Main.js"></script>
     </body>

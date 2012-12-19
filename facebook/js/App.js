@@ -22,7 +22,7 @@ App.prototype.init = function ()
 		caption: "Amazingly Easy!",
 		description: "Cowabonga dudes...",
 		picture: "http://cdn.firearmstalk.com/forums/attachments/f12/15073d1275433474-random-creepy-things-thread-catdog.jpg"
-		};
+    };
     
     // construct an object to pass to the Facebook API post.
     this.postObjectForAPI = {
@@ -37,6 +37,15 @@ App.prototype.init = function ()
     
     this.uiPostButton.onclick = function () {self.postUsingUI ();};
     this.apiPostButton.onclick = function () {self.postUsingAPI ();};
+    
+    /*
+        -- NOTE --
+        If you want to use the Facebook graph API to post without user intervention the 'publish_stream' permission is required,
+        which should be passed as a param when initialising the Facebook instance.
+        
+        this can be done with the method:
+        TMW.App.postUsingAPI ();
+    */
 }
 
 App.prototype.postUsingUI = function ()
