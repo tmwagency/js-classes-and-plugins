@@ -1,0 +1,29 @@
+html, body, #touch-point-container
+{
+	width: 100%;
+	height: 100%;
+}
+
+html, body, div
+{
+	margin: 0;
+	padding: 0;
+}
+
+#touch-point-container
+{
+	background: #000;
+}
+
+.touch-point
+{
+	width: 200px;
+	height: 200px;
+	position: absolute;
+
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
+	border-radius: 100%;
+	
+	background: #0000ff;
+}
