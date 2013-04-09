@@ -6,7 +6,7 @@
 	contact	: @munkychop
 
 
-	DEPENDANCIES
+	DEPENDENCIES
 	------------------------
 	jQuery		: http://jquery.com/
 	js-signals	: millermedeiros.github.com/js-signals/
