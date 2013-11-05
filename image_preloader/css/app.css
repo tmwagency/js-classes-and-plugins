@@ -1,0 +1,54 @@
+html, body
+{
+	margin: 0;
+	padding: 0;
+}
+
+.hidden
+{
+	visibility: hidden;
+}
+
+.wrapper
+{
+	width: 600px;
+	margin: 20px auto;
+	border: 1px solid #ccc;
+	padding: 10px 20px 50px 20px;
+}
+	.heading, .subheading
+	{
+		text-align: center;
+	}
+
+	.heading
+	{
+		font-size: 50px;
+		margin-bottom: 6px;
+	}
+
+	.subheading
+	{
+		font-size: 18px;
+		margin-bottom: 40px;
+	}
+
+	.monkey-image
+	{
+		width: 400px;
+		height: 300px;
+		background-repeat: no-repeat;
+		background-size: 100%;
+		margin: 14px auto 0 auto;
+	}
+
+
+	/*
+		only set the image URLs once the preloaded class has been added with JavaScript.
+		this will load the images from cache (but be careful with memory managment on mobile devices).
+	*/
+	.image-01.preloaded {background-image: url('../img/01.jpg');}
+	.image-02.preloaded {background-image: url('../img/02.jpg');}
+	.image-03.preloaded {background-image: url('../img/03.jpg');}
+	.image-04.preloaded {background-image: url('../img/04.jpg');}
+	.image-05.preloaded {background-image: url('../img/05.jpg');}
