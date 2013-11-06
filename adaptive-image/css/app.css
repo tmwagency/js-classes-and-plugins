@@ -1,0 +1,40 @@
+html, body
+{
+	margin: 0;
+	padding: 0;
+}
+
+.wrapper
+{
+	width: 80%;
+	max-width: 800px;
+	margin: 20px auto;
+	border: 1px solid #ccc;
+	padding: 10px 20px 50px 20px;
+}
+	.heading, .subheading
+	{
+		text-align: center;
+	}
+
+	.heading
+	{
+		font-size: 50px;
+		margin-bottom: 6px;
+	}
+
+	.subheading
+	{
+		font-size: 18px;
+		margin-bottom: 40px;
+	}
+
+	.adaptive-image
+	{
+		width: 100%;
+	}
+
+
+img {
+	max-width: 100%;
+}
