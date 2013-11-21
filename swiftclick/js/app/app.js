@@ -1,11 +1,45 @@
 (function ()
 {
-	// Create a reference to a new instance of SwiftClick and attach it to a context element.
-	var swiftclick = new SwiftClick (document.body);
+	/*
+		// Approach 1
 
-	// if necessary you can make SwiftClick track additional element types by adding an array of the node names.
-	// (this is just an example of how to add elements, but isn't really needed within this app.)
-	swiftclick.addNodeNamesToTrack (["p", "h1", "nav"]);
+		Attach SwiftClick to any element you want to use as a context for tracking click events.
+		document.body is easiest if you only need a single instance of SwiftClick.
+	*/
+	SwiftClick.attach (document.body);
+
+	
+	/*
+		------------- OR -------------
+		// Approach 2
+
+		Create a reference to a new instance of SwiftClick using the 'attach' helper method and attach it to a context element.
+		This approach allows you to create multiple instances of SwiftClick on, for example, specific container elements such as navigation,
+		and also exposes the public API.
+		
+		var swiftclick = SwiftClick.attach (some-element);
+	*/
+
+
+	/*
+		------------- OR -------------
+		// Approach 3
+
+		Create a reference to a new instance of SwiftClick directly and attach it to a context element.
+		This approach is the same as approach 2, but just uses the 'new' keyword instead of the 'attach' method.
+
+		var swiftclick = new SwiftClick (some-element);
+	*/
+
+
+	/* 
+		------------- AND -------------
+		If necessary you can make SwiftClick track additional element types by adding an array of node names.
+		this requires a reference to an instance of SwiftClick.
+
+		swiftclick.addNodeNamesToTrack (["p", "h1", "nav"]);
+	*/
+
 
 	// add normal click listeners to all elements with class 'test-element'.
 	var testElements = document.getElementsByClassName("test-element"),
