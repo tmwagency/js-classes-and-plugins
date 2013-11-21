@@ -25,7 +25,6 @@
 		------------- OR -------------
 		// Approach 3
 
-		Create a reference to a new instance of SwiftClick directly and attach it to a context element.
 		This approach is the same as approach 2, but just uses the 'new' keyword instead of the 'attach' method.
 
 		var swiftclick = new SwiftClick (some-element);
