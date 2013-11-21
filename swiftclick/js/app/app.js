@@ -1,7 +1,11 @@
 (function ()
 {
-	// Attach SwiftClick and pass in a context element.
-	SwiftClick.attach (document.body);
+	// Create a reference to a new instance of SwiftClick and attach it to a context element.
+	var swiftclick = new SwiftClick (document.body);
+
+	// if necessary you can make SwiftClick track additional element types by adding an array of the node names.
+	// (this is just an example of how to add elements, but isn't really needed within this app.)
+	swiftclick.addNodeNamesToTrack (["p", "h1", "nav"]);
 
 	// add normal click listeners to all elements with class 'test-element'.
 	var testElements = document.getElementsByClassName("test-element"),

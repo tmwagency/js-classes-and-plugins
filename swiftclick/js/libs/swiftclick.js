@@ -6,9 +6,6 @@ function SwiftClick (contextEl)
 		maxTouchDrift: 44
 	};
 
-	// SwiftClick is only used if both touch and orientationchange are supported.
-	if (! ("onorientationchange" in window && "ontouchstart" in window)) return;
-
 	var _self							= this,
 		_swiftContextEl					= contextEl,
 		_swiftContextElOriginalClick	= _swiftContextEl.onclick,
@@ -18,21 +15,31 @@ function SwiftClick (contextEl)
 		_touchEnd						= "undefined",
 		_shouldSynthesizeClickEvent		= true;
 
-	// check if the swift el already has a click handler and if so hijack it so it get's fired after SwiftClick's, instead of beforehand.
-	if (typeof _swiftContextElOriginalClick === "function")
+
+	// SwiftClick is only initialised if both touch and orientationchange are supported.
+	if ("onorientationchange" in window && "ontouchstart" in window)
 	{
-		_swiftContextEl.addEventListener ("click", hijackedSwiftElClickHandler, false);
-		_swiftContextEl.onclick = null;
+		init ();
+	}
+
+	function init ()
+	{
+		// check if the swift el already has a click handler and if so hijack it so it get's fired after SwiftClick's, instead of beforehand.
+		if (typeof _swiftContextElOriginalClick === "function")
+		{
+			_swiftContextEl.addEventListener ("click", hijackedSwiftElClickHandler, false);
+			_swiftContextEl.onclick = null;
+		}
+
+		// add listeners.
+		_swiftContextEl.addEventListener ("touchstart", touchStartHandler, false);
+		_swiftContextEl.addEventListener ("touchend", touchEndHandler, false);
 	}
 
 	function hijackedSwiftElClickHandler (event)
 	{
 		_swiftContextElOriginalClick (event);
 	}
-
-	// add listeners.
-	_swiftContextEl.addEventListener ("touchstart", touchStartHandler, false);
-	_swiftContextEl.addEventListener ("touchend", touchEndHandler, false);
 
 	function touchStartHandler (event)
 	{
