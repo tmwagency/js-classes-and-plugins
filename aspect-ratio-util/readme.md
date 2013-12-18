@@ -2,7 +2,6 @@
 AspectRatioUtil
 ---------------
 
-------------------------------------------------
 
 ### Usage:
 Create a new instance of the util and pass true for the last param if you want to use the 'resize' instead of 'orientationchange' for the event listened to by the util:
