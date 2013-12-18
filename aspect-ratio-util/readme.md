@@ -15,7 +15,7 @@ Start listening for orientationchange/resize events:
 
 - Callbacks only get fired a single time per switch between ratios.
 - Callbacks won't get fired immedietly when the 'start' method is called.
-- The until includes a [shim][1] for addEventListener.
+- The util includes a [shim][1] for addEventListener/removeEventListener.
 
 
 ------------------------------------------------
