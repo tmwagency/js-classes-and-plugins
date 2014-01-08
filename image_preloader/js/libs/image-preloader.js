@@ -1,16 +1,11 @@
-function ImagePreloader (allImagesLoadedCallback)
+function ImagePreloader ()
 {
-	//---------------------------------------------------------------------------------------
-	// PUBLIC PROPERTIES
-	//---------------------------------------------------------------------------------------
-	this.allImagesLoadedCallback = allImagesLoadedCallback;
-
-
 	//---------------------------------------------------------------------------------------
 	// PRIVATE PROPERTIES
 	//---------------------------------------------------------------------------------------
-	var _self					= this,
-		_totalImagesLoading		= 0;
+	var _self						= this,
+		_totalImagesLoading			= 0,
+		_allImagesLoadedCallback;
 
 
 	//---------------------------------------------------------------------------------------
@@ -22,20 +17,26 @@ function ImagePreloader (allImagesLoadedCallback)
 
 		_totalImagesLoading--;
 
+		if (typeof this.cb !== "undefined") this.cb ();
+
 		// console.log ("ImagePreloader:: [imageLoaded] _totalImagesLoading: " + _totalImagesLoading);
 
 		if (_totalImagesLoading === 0)
 		{
-			_self.allImagesLoadedCallback ();
+			if (typeof _allImagesLoadedCallback !== "undefined") _allImagesLoadedCallback ();
+
+			_allImagesLoadedCallback = undefined;
 		}
 	}
 
-	function preloadImage (imageURL)
+	function preloadImage (imageURL, cb)
 	{
 		if (typeof (imageURL) === "undefined" || imageURL === "")
 		{
 			// console.log ("ImagePreloader:: [preloadImage] imageURL is not defined, or is an empty string... forcing 'imageLoaded' method and returning.");
+			
 			imageLoaded ();
+			if (typeof cb !== "undefined") cb ();
 			return;
 		}
 
@@ -43,20 +44,23 @@ function ImagePreloader (allImagesLoadedCallback)
 
 		var image = new Image ();
 		image.onload = imageLoaded;
+		image.cb = typeof cb !== "undefined" ? cb : undefined;
 		image.src = imageURL;
 	}
 
 	//---------------------------------------------------------------------------------------
 	// PUBLIC API
 	//---------------------------------------------------------------------------------------
-	_self.load = function (imageURL)
+	_self.load = function (imageURL, cb)
 	{
 		_totalImagesLoading++;
-		preloadImage (imageURL);
+		preloadImage (imageURL, cb);
 	};
 
-	_self.loadMultiple = function (imageURLArray)
+	_self.loadMultiple = function (imageURLArray, cb)
 	{
+		_allImagesLoadedCallback = cb;
+
 		var i = 0,
 			length = imageURLArray.length;
 
