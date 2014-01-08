@@ -97,7 +97,6 @@ TMW.AdaptiveImage = {
 					imgExt = imgPath.substring(imgPath.lastIndexOf('.'), imgPath.length);
 
 				imgPath = imgName + this.pixelDensity + imgExt;
-				console.log(imgPath)
 			}
 
 			//and set the imgPath of the image
