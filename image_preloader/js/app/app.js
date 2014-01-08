@@ -14,13 +14,12 @@ function init ()
 	// all images are preloaded.
 	allMonkeyImages = document.getElementsByClassName("monkey-image");
 
-	// create a new instance of the ImagePreloader class and pass in a callback to be
-	// fired once all images are loaded.
-	preloader = new ImagePreloader (allImagesLoaded);
+	// create a new instance of the ImagePreloader class.
+	preloader = new ImagePreloader ();
 
-	// start preloading images by calling the 'loadMultiple' method and
-	// passing in an array of URLs for the images you want to preload.
-	preloader.loadMultiple (["img/01.jpg", "img/02.jpg", "img/03.jpg", "img/04.jpg", "img/05.jpg"]);
+	// start preloading images by calling the 'loadMultiple' method and pass in an array
+	// of URLs for the images you want to preload and a callback to be fired once all images are loaded.
+	preloader.loadMultiple (["img/01.jpg", "img/02.jpg", "img/03.jpg", "img/04.jpg", "img/05.jpg"], allImagesLoaded);
 }
 
 // function that runs once all images have been preloaded.
