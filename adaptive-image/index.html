@@ -7,7 +7,8 @@
 	<body>
 		<div class="wrapper">
 			<h1 class="heading">Adaptive Image Demo</h1>
-			<h2 class="subheading">The below images are loaded with screen size in mind.</h2>
+			<h2 class="subheading">The below images are loaded with screen size and pixel density in mind.</h2>
+			<p>To use the AdaptiveImage helper, call <pre>TMW.AdaptiveImage.init(window, true);</pre> where the first argument is your window and the second argument whether you want the script to prefix your images with -2x for retina quality images.</p>
 			<div class="adaptive-image" data-adaptive="" data-adaptive-image-breakpoints="320 480 800" data-alt="Adaptive Test Image" data-img-320="img/less320.jpg" data-img-480="img/less480.jpg" data-img-800="img/less800.jpg" data-img-max="img/max.jpg">
 				<noscript>
 					<img src="img/max.jpg" width="800" height="800" alt="Adaptive Test Image" title="Adaptive Test Image" />

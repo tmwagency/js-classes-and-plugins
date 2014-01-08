@@ -14,70 +14,107 @@ var TMW = window.TWW || {};
 :	2. adaptiveChecker
 ********************************************************/
 TMW.AdaptiveImage = {
+	checkForPixelDensity: false,
+	pixelDensity: '',
 
-	init : function(w) {
+	init : function(w, px) {
+
+		//set whether we bother setting for retina devices
+		this.checkForPixelDensity = px;
+		if (this.checkForPixelDensity) {
+			this.pixelDensity = this.getPixelRatio();
+		}
 
 		// Run on resize and domready (w.load as a fallback)
 		if( w.addEventListener ) {
 			w.addEventListener( "DOMContentLoaded", function(){
-				TMW.AdaptiveImage.adaptiveChecker();
+				TMW.AdaptiveImage.checkAdaptiveElements();
 				// Run once only
-				w.removeEventListener( "load", TMW.AdaptiveImage.adaptiveChecker, false );
+				w.removeEventListener( "load", TMW.AdaptiveImage.checkAdaptiveElements, false );
 			}, false );
-			w.addEventListener( "load", TMW.AdaptiveImage.adaptiveChecker, false );
+			w.addEventListener( "load", TMW.AdaptiveImage.checkAdaptiveElements, false );
 		}
 		else if( document.attachEvent ){
 			w.attachEvent( "onload", function () {
-				TMW.AdaptiveImage.adaptiveChecker();
+				TMW.AdaptiveImage.checkAdaptiveElements();
 			} );
 		}
 
 	},
 
+	//finds all div elements on the page with the adaptive-image data attribute set, or can be passed a subset of elements
+	checkAdaptiveElements : function (elements) {
 
-	adaptiveChecker : function (elements) {
+		var ps = elements || window.document.getElementsByTagName( "div" );// list of all div elements on our page
 
-		var ps = elements || window.document.getElementsByTagName( "div" );
-		// Loop the pictures
+		// Loop through each div which has the data-adaptive attribute and isn't hidden
 		for( var i = 0, il = ps.length; i < il; i++ ) {
 			if( ps[ i ].getAttribute( "data-adaptive" ) !== null &&
 				ps[ i ].style.display !== 'none' ) {
-				var selected_breakpoint = 'max',
-					breakpoints = ps[ i ].getAttribute("data-adaptive-image-breakpoints");
 
-				if (breakpoints) {
-					breakpoints = breakpoints.split(' ');
+				this.loadImage( ps[ i ] );
+			}
+		}
+	},
 
-					for( var j = 0, br = breakpoints.length; j < br; j++ ){
-						if (document.documentElement.clientWidth <= Number(breakpoints[j]) &&
-							(selected_breakpoint == 'max' || Number(breakpoints[j]) < Number(selected_breakpoint))) {
-							selected_breakpoint = breakpoints[j];
-						}
-					}
-				}
+	loadImage : function (element) {
 
+		var selected_breakpoint = 'max', // used to store which breakpoint image to load - reset to max
+			breakpoints = element.getAttribute("data-adaptive-image-breakpoints"); // stores the specified breakpoints to choose between, defined on the data attribute data-adaptive-image-breakpoints
 
-				//get the image path for the right breakpoint
-				imgPath = ps[ i ].getAttribute('data-img-' + selected_breakpoint);
+		//if breakpoints exists
+		if (breakpoints) {
+			//split the values
+			breakpoints = breakpoints.split(' ');
 
-				// Find any existing img element in the adaptive element
-				var picImg = ps[ i ].getElementsByTagName( "img" )[ 0 ];
+			//and loop through the resulting breakpoint array to find the most appropriate breakpoint to use
+			for ( var j = 0, br = breakpoints.length; j < br; j++ ) {
+				if (document.documentElement.clientWidth <= Number(breakpoints[j]) &&
+					(selected_breakpoint == 'max' || Number(breakpoints[j]) < Number(selected_breakpoint))) {
 
-				if( imgPath ){
-					if( !picImg ){
-						picImg = document.createElement( "img" );
-						picImg.alt = ps[ i ].getAttribute( "data-alt" );
-						ps[ i ].appendChild( picImg );
-					}
+					selected_breakpoint = breakpoints[j];
 
-					picImg.src =  imgPath;
-				}
-				else if( picImg ){
-					ps[ i ].removeChild( picImg );
 				}
 			}
 		}
+
+		//get the image path for the correct breakpoint
+		imgPath = element.getAttribute('data-img-' + selected_breakpoint);
+
+		// Find any existing img element in the adaptive element
+		var picImg = element.getElementsByTagName( "img" )[ 0 ];
+
+		if( imgPath ){
+			if( !picImg ){
+				picImg = document.createElement( "img" );
+				picImg.alt = element.getAttribute( "data-alt" );
+				element.appendChild( picImg );
+			}
+
+			//check whether to add pixelDensity into the filename for retina images
+			if (this.checkForPixelDensity === true && this.pixelDensity !== '') {
+				var imgName = imgPath.substring(0, imgPath.lastIndexOf('.')),
+					imgExt = imgPath.substring(imgPath.lastIndexOf('.'), imgPath.length);
+
+				imgPath = imgName + this.pixelDensity + imgExt;
+				console.log(imgPath)
+			}
+
+			//and set the imgPath of the image
+			picImg.src =  imgPath;
+		}
+		else if( picImg ){
+			element.removeChild( picImg );
+		}
+	},
+
+	getPixelRatio : function () {
+
+		if (window.devicePixelRatio > 1) {
+			return '-2x';
+		}
+		return '';
 	}
 }
 
-TMW.AdaptiveImage.init(window);
+TMW.AdaptiveImage.init(window, true);
