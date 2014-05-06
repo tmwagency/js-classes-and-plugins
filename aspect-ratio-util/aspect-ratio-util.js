@@ -1,14 +1,14 @@
-function AspectRatioUtil (maxLandscapeMobileWidth, portraitCallback, landscapeCallback, useResizeInsteadOfOrientationchange)
+function AspectRatioUtil (portraitCallback, landscapeCallback, useResizeInsteadOfOrientationchange)
 {
 	// ------------------------------------------------------------
 	// PRIVATE MEMBER VARIABLES
 	// ------------------------------------------------------------
 	var _self = this,
-		_maxMobileWidth = maxLandscapeMobileWidth,
 		_updateEventType = useResizeInsteadOfOrientationchange === true ? "resize" : "orientationchange",
-		_isMobile = false,
+		_isMobile = "onorientationchange" in window && "ontouchstart" in window ? true : false,
 		_isPortrait = false,
-		_isLandscape = false;
+		_isLandscape = false,
+		_isRunning = false;
 
 	// ------------------------------------------------------------
 	// PUBLIC MEMBER VARIABLES
@@ -26,16 +26,6 @@ function AspectRatioUtil (maxLandscapeMobileWidth, portraitCallback, landscapeCa
 
 		var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
 			height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-
-
-		if (width > _maxMobileWidth)
-		{
-			_isMobile = false;
-		}
-		else
-		{
-			_isMobile = true;
-		}
 
 		if (width > height)
 		{
@@ -84,15 +74,23 @@ function AspectRatioUtil (maxLandscapeMobileWidth, portraitCallback, landscapeCa
 
 	_self.start = function ()
 	{
+		if (_isRunning) return;
+
 		// immediately check aspect ratio in order to set accurate initial values.
 		checkAspectRatio ();
 
 		window.addEventListener (_updateEventType, checkAspectRatio);
+
+		_isRunning = true;
 	};
 
 	_self.stop = function ()
 	{
+		if (!_isRunning) return;
+
 		window.removeEventListener (_updateEventType, checkAspectRatio);
+
+		_isRunning = false;
 	};
 }
 

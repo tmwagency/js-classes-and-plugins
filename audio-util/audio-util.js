@@ -39,7 +39,7 @@ function AudioUtil ()
 			fileExtension = ".ogg";
 		}
 
-		audio.setAttribute("src", audioFile + fileExtension);
+		audio.setAttribute("src", audioFileName + fileExtension);
 		audio.preload = "auto";
 		audio.loop = loop === true ? true : false;
 

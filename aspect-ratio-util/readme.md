@@ -3,18 +3,25 @@
 
 ------------------------------------------------
 
+This util makes it easy to perform actions when switching between aspect ratios by firing user-defined callbacks.
+
+It sees landscape aspect ratio as width being greater than height, and portrait aspect ratio as the opposite.
 
 ### Usage:
-Create a new instance of the util and pass true for the last param if you want to use 'resize' instead of 'orientationchange' for the event listened to by the util:
+Create a new instance of the util, passing in functions to run when the aspect ratio changes:
 
-    var aspectRatioUtil = new AspectRatioUtil (480, changeToPortraitCallback, changeToLandscapeCallback, true);
+    var aspectRatioUtil = new AspectRatioUtil (changeToPortraitCallback, changeToLandscapeCallback);
 
-Start listening for orientationchange/resize events:
+Start listening for orientationchange events:
 
     aspectRatioUtil.start ();
 
+If you want to use `'resize'` instead of `'orientationchange'` for the event that the util listens for then pass `'true'` as a third parameter within the constructor:
+
+	var aspectRatioUtil = new AspectRatioUtil (changeToPortraitCallback, changeToLandscapeCallback, true);
+
 - Callbacks only get fired a single time per switch between ratios.
-- Callbacks won't get fired immedietly when the 'start' method is called.
+- Callbacks **won't** get fired immediately when the `'start'` method is called.
 - The util includes a [shim][1] for addEventListener/removeEventListener.
 
 
