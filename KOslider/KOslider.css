@@ -1,0 +1,88 @@
+/*
+   Slider basics
+   ========================================================================== */
+.js .KOsliderContainer {
+  width: 100%;
+  overflow: hidden; }
+
+.js .slider {
+  position: relative;
+  overflow: hidden;
+  transition: transform 400ms cubic-bezier(0.645, 0.045, 0.355, 1), height 400ms cubic-bezier(0.645, 0.045, 0.355, 1); }
+  .js .slider li {
+    float: left;
+    position: relative;
+    z-index: 100; }
+
+.no-js .slider li {
+  margin-bottom: 25px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #fff; }
+
+/*
+   Pagination wrapper
+   ========================================================================== */
+.js .sliderUI {
+  min-height: 38px;
+  padding: 10px 0; }
+  .js .sliderUI.sliderUI--above {
+    border-bottom: 2px solid #fff;
+    margin-bottom: 10px; }
+  .js .sliderUI.sliderUI--below {
+    border-top: 2px solid #fff;
+    margin-top: 10px;
+    text-align: center; }
+  .js .sliderUI.sliderUI--over {
+    margin-top: 10px;
+    text-align: center; }
+
+.no-js .sliderUI {
+  display: none; }
+
+/*
+   Dots
+   ========================================================================== */
+.sliderUI-dots {
+  display: inline-block;
+  line-height: 30px;
+  height: 28px;
+  margin: 0 5px; }
+
+.sliderUI-dots-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 20px;
+  margin: 0 5px;
+  opacity: 0.6;
+  background-color: #444444;
+  transition: all 200ms ease-in-out; }
+  .sliderUI-dots-dot.is-active {
+    opacity: 1; }
+
+/*
+   Pagers
+   ========================================================================== */
+.sliderUI-pagers {
+  display: inline-block; }
+
+.slider-btn {
+  overflow: hidden;
+  width: 70px;
+  height: 28px;
+  background-color: #444444;
+  text-indent: 150%;
+  display: inline-block;
+  border: none;
+  border-radius: 50px; }
+  .slider-btn:hover, .slider-btn:focus {
+    background-color: #2b2b2b;
+    outline: none; }
+  .slider-btn[disabled] {
+    opacity: 0.6; }
+  .slider-btn[disabled]:hover {
+    background-color: transparent; }
+  .slider-btn.previous {
+    background-position: 8px center; }
+  .slider-btn.next {
+    background-position: 12px center; }
