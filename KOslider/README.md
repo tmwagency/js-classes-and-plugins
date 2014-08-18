@@ -1,4 +1,4 @@
-# KOslider
+# KOslider [beta]
 ## Simple jQuery carousel plugin using CSS3 transitions
 
 ###Example usage on an HTML element:
