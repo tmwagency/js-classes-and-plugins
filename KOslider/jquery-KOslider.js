@@ -68,7 +68,7 @@
 		_.init = function(el, options) {
 			//  Check whether we're passing any options in to KOslider
 			_.options = $.extend(_.options, options);
-			_.el      = el;
+			_.el      = el; // .KOsliderContainer
 			_.slider  = el.find(_.options.sliderEl);
 			_.slide   = _.slider.find(_.options.slide);
 			if (_.options.debug) { console.log('_.options', _.options, 'options', options); }
@@ -233,23 +233,21 @@
 		 * Set sizes for element
 		 */
 		_.setSize = function(itemWidth) {
-			var ulWidth     = _.slide.length * itemWidth;
-			var $sliderWidth = _.el.hasClass('.slider') ? _.el.width() : _.el.find('.slider').width();
+			var $containerWidth = _.el.width();               // Container width
+			var $sliderWidth    = _.slide.length * itemWidth; // full width of slider with all items floated
+			_.max               = Math.round(-($sliderWidth - $containerWidth));
+			_.leftOffset        = -(itemWidth * _.index);
 
-			_.slider.css({ width: Math.round(ulWidth) });
+			_.slider.css({
+				width    : Math.round($sliderWidth),
+				transform: 'translateX(' + _.leftOffset + 'px)'
+			});
 			_.slide.css({ width: itemWidth });
-
-			// console.log('(_.slide.length * itemWidth)', (_.slide.length * itemWidth), '_.el.width()', _.el.width(), '$sliderWidth', $sliderWidth);
-
-			_.max = Math.round(-(ulWidth - $sliderWidth));
-
-			_.leftOffset = -(itemWidth * _.index);
-			_.slider.css('transform', 'translateX(' + _.leftOffset + 'px)');
 
 			_.setHeight(_.index);
 
 			// Create UI if there is enough space to do so
-			if (ulWidth > $sliderWidth) {
+			if ($sliderWidth > $containerWidth) {
 				// Create UI - Dots and next/prev buttons
 				if (_.el.find('.sliderUI').length === 0) {
 					_.createUI();
@@ -267,29 +265,10 @@
 			}
 
 			if (_.options.debug) {
-				console.log('_.setSize() :: \n\t_.max:', _.max , '\n\t_.min:', _.min, '\n\tleftOffset:', _.leftOffset, '\n\tindex', _.index, '\n\titemWidth:', _.itemWidth, '\n\t_.slide.length', _.slide.length, '\n\tulWidth', ulWidth, '\n\t_.el.width()', _.el.width(), '_.el.find(\'.slider\').width()\')', _.el.find('.slider').width());
+				console.log('_.setSize() :: \n\t_.max:', _.max , '\n\t_.min:', _.min, '\n\tleftOffset:', _.leftOffset, '\n\tindex', _.index, '\n\titemWidth:', _.itemWidth, '\n\t_.slide.length', _.slide.length, '\n\t$sliderWidth', $sliderWidth, '\n\t_.el.width()', _.el.width(), '_.el.find(\'.slider\').width()\')', _.el.find('.slider').width());
 			}
 		};
 
-		/**
-		 * Set sizes for element
-		 */
-		// _.setSize = function(itemWidth) {
-		// 	_.slider.css('width', Math.round(_.slide.length * itemWidth));
-		// 	_.slide.css({ width: itemWidth });
-
-		// 	if (_.options.heightSet == "auto") {
-		// 		_.setHeight(_.index);
-		// 	}
-
-		// 	_.max = Math.round(itemWidth - (_.slide.length * itemWidth));
-		// 	_.leftOffset = -(itemWidth * _.index);
-		// 	_.slider.css('transform', 'translateX(' + _.leftOffset + 'px)');
-
-		// 	if (_.options.debug) {
-		// 		console.log('_.setSize() :: max:', _.max, 'min:', _.min, 'leftOffset:', _.leftOffset, 'index', _.index, 'itemWidth:', _.itemWidth, '_.slide.length', _.slide.length);
-		// 	}
-		// };
 
 		/**
 		 * Set height of <ul> based on heightChange option
@@ -300,10 +279,29 @@
 					_.slider.height(newHeight);
 				} else if(_.options.setHeight == "equal") {
 					_.equalizeHeights();
-					if (_.options.debug) { console.log('Equal true'); }
 				}
-				console.log("SetHeight called");
 		};
+
+
+		/**
+		 * Equalise Heights _.equalizeHeights()
+		 */
+		_.equalizeHeights = function() {
+			if (_.options.debug) { console.log('Equal true'); }
+			var highestBox = 0;
+			var $equaliseEl = _.options.equaliseEl;
+
+			_.slider.find($equaliseEl).each(function(){
+				$(this).removeAttr('style');
+
+				if( $(this).height() > highestBox ) {
+					highestBox = $(this).height();
+				}
+			});
+			_.slider.find($equaliseEl).css('height', highestBox);
+			if (_.options.debug) { console.log('_.equalizeHeights() :: \n\thighestBox:', highestBox); }
+		};
+
 
 		/**
 		 * Create the UI
@@ -496,28 +494,6 @@
 
 			// Initialise the swipe
 			init(100, 40);
-		};
-
-
-		/**
-		 * Equalise Heights _.equalizeHeights()
-		 */
-		_.equalizeHeights = function() {
-			var highestBox = 0;
-
-			_.slide.each(function(){
-				$(_.options.equalHeight, this).each(function(){
-					$(this).removeAttr('style');
-
-					if( $(this).height() > highestBox ) {
-						highestBox = $(this).height();
-					}
-				});
-			});
-			_.slide.find(_.options.equalHeight).css('height', highestBox);
-			if (_.options.debug) {
-				console.log('_.equalizeHeights() :: \n\thighestBox:', highestBox);
-			}
 		};
 	};
 
