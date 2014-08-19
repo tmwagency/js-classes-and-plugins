@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="js">
+<html lang="en" class="no-js">
 <head>
 	<meta charset="UTF-8">
 	<title>KOslider</title>
@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="KOslider.css">
 </head>
 <body>
+	<script>document.body.parentElement.className = document.body.parentElement.className.replace('no-js', 'js');</script>
 
 	<div class="g-container">
 		<h1>KOslider</h1>
@@ -14,7 +15,7 @@
 
 		<h4>Example:</h4>
 
-		<div class="KOsliderContainer" data-koslider='{"keys":"true","uiPosition":"below","debug":true,"setHeight":"equal","dotsClick":true,"customNextClass":"nextnext","customPrevClass":"prevprev"}'>
+		<div class="KOsliderContainer" data-koslider='{"keys":"true","uiPosition":"below","debug":true,"setHeight":"auto","dotsClick":true,"customNextClass":"nextnext","customPrevClass":"prevprev"}'>
 			<ul class="slider unstyled clearfix">
 				<li class="slide">
 					<h4>1This is the title</h4>
