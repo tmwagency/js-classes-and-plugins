@@ -31,12 +31,14 @@ $('.slider').KOslider({
 "customPrevClass" : "icon-arrow-previous", [string]  Classname for prev button icon
 "customNextClass" : "icon-arrow-next"      [string]  Classname for next button icon
 "debug"           : false                  [boolean] Show debug info
-"callbacks"       : undefined              [object]  Add custom callbacks
 "setHeight"       : "auto"                 [string]  "auto" = Change height of slides according to content; "equal" = equalise height of all slides; "none" = don't adjust height at all
 "debug"           : false                  [boolean] Show debug info
 "autoplay"        : false                  [boolean] autoplay the slider
 "autoplayInterval": 4000                   [integer] Change the autoplay speed
 "swipe"           : false                  [boolean] enable swipe for touch
 "itemWidth"       : undefined              [string]  define an element width instead of calculating it
-"activeClass
+"inactiveClass"   : "slider--inactive"     [string]
+"activeClass"     : "slider--active"       [string]
+"callbacks"       : undefined              [object]  Add custom callbacks
+"equaliseEl"      : undefined              [string]  Selector used to calculate equalised heights
 ```
