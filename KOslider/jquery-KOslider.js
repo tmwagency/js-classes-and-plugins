@@ -67,13 +67,14 @@
 			//  Check whether we're passing any options in to KOslider
 			_.options = $.extend(_.options, options);
 			_.el      = el;
-			_.ul      = el.find(_.options.items);
-			_.slide      = _.ul.find(_.options.item);
+			_.slider  = el.find(_.options.sliderEl);
+			_.slide   = _.slider.find(_.options.slide);
 			if (_.options.debug) { console.log('_.options', _.options, 'options', options); }
 
 			// If fewer than 2 children do not setup KOslider
 			if ( _.slide.length < 2) {
 				el.addClass(_.options.inactiveClass);
+				if (_.options.debug) { console.log('not enough to make a slider', options); }
 				return;
 			}
 
@@ -116,8 +117,8 @@
 
 
 		$.fn.KOslider.destroy = function() {
-			_.ul.css('width', 'auto').data({KOslider: undefined, key: undefined});
-			_.ul.find('.sliderUI').remove();
+			_.slider.css('width', 'auto').data({KOslider: undefined, key: undefined});
+			_.slider.find('.sliderUI').remove();
 			_.slide.css('width', 'auto');
 		};
 
@@ -145,7 +146,7 @@
 
 			_.setHeight(x);
 
-			_.ul.css('transform', 'translateX(' + _.leftOffset + 'px)');
+			_.slider.css('transform', 'translateX(' + _.leftOffset + 'px)');
 
 			if (_.options.debug) {
 				console.log('_.goto() :: \n\tx', x, '\n\tleftOffset:', _.leftOffset, '\n\tindex', _.index, '\n\titemWidth:', _.itemWidth, '\n\tmove amount:', _.leftOffset / _.index, '\n\tshould move amount:', _.itemWidth);
@@ -233,7 +234,7 @@
 			var ulWidth     = _.slide.length * itemWidth;
 			var $sliderWidth = _.el.hasClass('.slider') ? _.el.width() : _.el.find('.slider').width();
 
-			_.ul.css({ width: Math.round(ulWidth) });
+			_.slider.css({ width: Math.round(ulWidth) });
 			_.slide.css({ width: itemWidth });
 
 			// console.log('(_.slide.length * itemWidth)', (_.slide.length * itemWidth), '_.el.width()', _.el.width(), '$sliderWidth', $sliderWidth);
@@ -241,7 +242,7 @@
 			_.max = Math.round(-(ulWidth - $sliderWidth));
 
 			_.leftOffset = -(itemWidth * _.index);
-			_.ul.css('transform', 'translateX(' + _.leftOffset + 'px)');
+			_.slider.css('transform', 'translateX(' + _.leftOffset + 'px)');
 
 			_.setHeight(_.index);
 
@@ -272,7 +273,7 @@
 		 * Set sizes for element
 		 */
 		// _.setSize = function(itemWidth) {
-		// 	_.ul.css('width', Math.round(_.slide.length * itemWidth));
+		// 	_.slider.css('width', Math.round(_.slide.length * itemWidth));
 		// 	_.slide.css({ width: itemWidth });
 
 		// 	if (_.options.heightSet == "auto") {
@@ -281,7 +282,7 @@
 
 		// 	_.max = Math.round(itemWidth - (_.slide.length * itemWidth));
 		// 	_.leftOffset = -(itemWidth * _.index);
-		// 	_.ul.css('transform', 'translateX(' + _.leftOffset + 'px)');
+		// 	_.slider.css('transform', 'translateX(' + _.leftOffset + 'px)');
 
 		// 	if (_.options.debug) {
 		// 		console.log('_.setSize() :: max:', _.max, 'min:', _.min, 'leftOffset:', _.leftOffset, 'index', _.index, 'itemWidth:', _.itemWidth, '_.slide.length', _.slide.length);
@@ -294,7 +295,7 @@
 		_.setHeight = function(eq) {
 				if (_.options.setHeight == "auto") {
 					var newHeight = _.slide.eq(eq).height();
-					_.ul.height(newHeight);
+					_.slider.height(newHeight);
 				} else if(_.options.setHeight == "equal") {
 					_.equalizeHeights();
 					if (_.options.debug) { console.log('Equal true'); }
