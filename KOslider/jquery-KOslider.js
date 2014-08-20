@@ -217,7 +217,7 @@
 			}
 
 			// Set first dot to be active
-			_.el.find('.sliderUI-dots-dot').eq(_.index).addClass('is-active').siblings().removeClass('is-active');
+			_.el.find('.sliderUI-dot').eq(_.index).addClass('is-active').siblings().removeClass('is-active');
 		};
 
 		/**
@@ -319,7 +319,7 @@
 			if (_.options.dots) {
 				html += '<div class="sliderUI-dots">';
 				$.each(_.slide, function() {
-					html += '<span class="sliderUI-dots-dot"></span>';
+					html += '<span class="sliderUI-dot"></span>';
 				});
 				html += '</div>';
 			}
@@ -336,7 +336,7 @@
 			} if (_.options.uiPosition == 'below') {
 				_.el.append(html);
 			}
-			_.el.find('.sliderUI-dots-dot').eq(0).addClass('is-active');
+			_.el.find('.sliderUI-dot').eq(0).addClass('is-active');
 		};
 
 
@@ -359,7 +359,7 @@
 		 * If dotsClick === true, allow the dots to be clicked
 		 */
 		_.dotsClick = function() {
-			_.el.on('click', '.sliderUI-dots-dot', function(event) {
+			_.el.on('click', '.sliderUI-dot', function(event) {
 				event.preventDefault();
 				var target = $(this).index();
 				if (_.options.debug) { console.log('target', target); }

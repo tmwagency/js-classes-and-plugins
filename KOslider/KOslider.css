@@ -48,7 +48,7 @@
   height: 28px;
   margin: 0 5px; }
 
-.sliderUI-dots-dot {
+.sliderUI-dot {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -57,7 +57,7 @@
   opacity: 0.6;
   background-color: #444444;
   transition: all 200ms ease-in-out; }
-  .sliderUI-dots-dot.is-active {
+  .sliderUI-dot.is-active {
     opacity: 1; }
 
 /*
