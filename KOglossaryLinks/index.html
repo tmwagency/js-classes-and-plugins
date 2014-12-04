@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>KOglossaryLinks</title>
+	<link rel="stylesheet" href="http://tmwagency.github.io/kickoff/css/kickoff.css">
+	<link rel="stylesheet" href="KOglossaryLinks.css">
+</head>
+	<body class="l-container">
+		<h1>KOglossaryLinks jQuery plugin</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis eum ea voluptatibus sapiente nihil consequatur, explicabo, <a href="" class="glossaryLink" data-koglossarylink="Glossary Term 1">Glossary term</a> delectus eos laborum nemo aspernatur ratione? Ullam similique praesentium maxime amet nesciunt dicta natus!</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis eum ea voluptatibus sapiente nihil consequatur, explicabo, <span data-koglossarylink="Glossary Term 2">Glossary term</span> delectus eos laborum nemo aspernatur ratione? Ullam similique praesentium maxime amet nesciunt dicta natus!</p>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="jquery-KOglossaryLinks.js"></script>
+		<script>
+		$(function(){
+			$(document.body).KOglossaryLinks({
+				sourceURL    : 'glossaryTerms.json',
+				element      : '.glossaryLink',
+				tooltipwidth : 260,
+				debug        : true
+			});
+		});
+		</script>
+	</body>
+</html>

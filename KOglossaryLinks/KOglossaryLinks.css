@@ -1,0 +1,97 @@
+[data-koglossarylink] {
+  position: relative;
+  border-bottom: none !important;
+  display: inline-block; }
+  [data-koglossarylink], [data-koglossarylink]:link, [data-koglossarylink]:visited {
+    color: green; }
+  [data-koglossarylink]:hover, [data-koglossarylink]:focus, [data-koglossarylink]:active {
+    color: #004d00; }
+  .no-js [data-koglossarylink]:hover, .no-js [data-koglossarylink]:focus, .no-js [data-koglossarylink]:active {
+    color: #444; }
+  [data-koglossarylink]:after {
+    content: '';
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 19px;
+    height: 25px;
+    vertical-align: middle;
+    margin-left: 1px; }
+
+.KOglossaryLinkTooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-top: 10px;
+  margin-left: -130px;
+  display: none !important;
+  text-align: left !important;
+  color: #444;
+  background: #dcdce6;
+  z-index: 10000;
+  padding: 15px;
+  border-radius: 6px;
+  width: 260px;
+  white-space: normal; }
+  .KOglossaryLinkTooltip.is-visible {
+    display: block !important; }
+  .KOglossaryLinkTooltip, .KOglossaryLinkTooltip * {
+    color: #444 !important; }
+
+.KOglossaryLinkTooltip-title {
+  color: green !important;
+  font-size: 22px !important;
+  margin-bottom: 0.3em;
+  line-height: 1; }
+
+.KOglossaryLinkTooltip-title--touch {
+  margin-right: 25px; }
+
+.KOglossaryLinkTooltip-description, .KOglossaryLinkTooltip-description p {
+  font-weight: normal !important;
+  font-size: 15px !important;
+  width: auto !important;
+  text-align: left !important; }
+.KOglossaryLinkTooltip-description :last-child {
+  margin-bottom: 0; }
+
+.KOglossaryLinkTooltip-close {
+  position: absolute;
+  background-color: #a1a1bb;
+  right: 5px;
+  top: 5px;
+  font-size: 20px;
+  width: 29px;
+  height: 29px;
+  text-align: center;
+  border-radius: 40px;
+  background-position: center center; }
+
+/* triangle decoration */
+.KOglossaryLinkTooltip-triangle {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #dcdce6; }
+
+.KOglossaryLinkTooltip.top:after {
+  border-top-color: transparent;
+  border-bottom: 10px solid #111;
+  top: -20px;
+  bottom: auto; }
+
+.KOglossaryLinkTooltip.left:after {
+  left: 10px;
+  margin: 0; }
+
+.KOglossaryLinkTooltip.right:after {
+  right: 10px;
+  left: auto;
+  margin: 0; }
+
+/*# sourceMappingURL=KOglossaryLinks.css.map */
